@@ -30,3 +30,4 @@ Responder siempre en **español**, claro y simple, explicando los términos téc
 | Proyecto | Nota | Estado | Última actualización |
 |---|---|---|---|
 | Rebill (sitio web) | [notas/rebill.md](notas/rebill.md) | en curso | 2026-10-11 |
+| Despacho Uber / Rappi (fuentes públicas) | [notas/despacho-uber-rappi.md](notas/despacho-uber-rappi.md) | en curso | 2026-10-11 |
