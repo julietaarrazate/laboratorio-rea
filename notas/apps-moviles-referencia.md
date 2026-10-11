@@ -100,6 +100,45 @@ Lógica leída del código decompilado (resumida con palabras propias; detalle d
 - Marcador en MapLibre con animación por cuadro, duración según distancia y modo "ponerse al día"; recentrar solo si la persona no movió el mapa.
 - Web Push por cambio de estado que reemplaza la notificación anterior del mismo turno, con cuenta regresiva calculada en el cliente.
 
+## Segunda pasada con JADX: ofertas de Uber Driver
+
+Lógica leída del código decompilado (resumida con palabras propias; Evidence IDs en la sesión de REA). No se estudiaron protecciones ni detección de fraude.
+
+**Cómo llega la oferta**
+- Tres vías: la conexión abierta (RAMEN, por gRPC o HTTP), el push de Google (FCM) y una consulta periódica de respaldo.
+- **Dos confirmaciones distintas:** una de "recibí el mensaje" por cada mensaje de la conexión, enviadas en lote, y otra de "se mostró la oferta" apenas aparece en pantalla, con reintentos.
+- Si llega un vencimiento o resultado de una oferta que no es la actual, se ignora.
+
+**Cuenta regresiva y vencimiento**
+- El servidor manda la **duración** de la ventana para aceptar; la app la cuenta desde que la muestra, con el reloj del teléfono.
+- Si se vence sin respuesta, la app **le avisa al servidor** y cierra la pantalla. El servidor puede marcar que, al vencer, se acepte sola.
+- Aceptar: corta sonido y vibración, opcionalmente pide confirmar si queda tiempo suficiente, adjunta la ubicación y envía con reintentos; la pantalla pasa enseguida a "aceptando". Rechazar: un solo intento, sin reintentos.
+
+**Con el teléfono bloqueado o la app en segundo plano**
+- La pantalla de oferta se muestra **sobre el bloqueo** y mantiene la pantalla prendida durante toda la ventana.
+- Si hay permiso de superposición, la dibuja encima de otras apps.
+- Además publica una notificación de alta prioridad con imagen de la oferta y **botones cuyo texto y acción manda el servidor**.
+- Accesibilidad: flash de la cámara, vibración y lectura en voz alta.
+
+**Bloqueos para conectarse**
+- Cada bloqueo (ubicación, GPS, superposición, notificaciones, red) es una pantalla con su propio "arreglar"; se combinan con bloqueos que manda el servidor.
+- Ya en línea, un sistema de diagnóstico de batería y red avisa en tres niveles que escalan: aviso → "no recibís viajes" → desconexión.
+
+**Subida de ubicación**
+- Un trabajo en primer plano con notificación fija que arranca al conectarse y se detiene al desconectarse.
+- Sube en lotes con intervalo y tamaño configurables; con red mala espacia los envíos (8 veces más).
+- **Alarma de "hombre muerto":** cada subida exitosa reprograma un aviso; si las subidas se cortan, el aviso dispara y le dice al conductor que su ubicación no se está enviando.
+
+**Confiabilidad de la conexión:** cada mensaje o latido reinicia un temporizador; si vence, reconecta. Si la conexión no está "fresca", entra la consulta periódica.
+
+**Aplicación en Oído**
+- Oferta urgente con hora de vencimiento absoluta decidida por el servidor (mejor que la duración de Uber), y el vencimiento lo ejecuta el servidor.
+- Envío por push de alta prioridad + canal en vivo con latido + consulta de respaldo mientras haya una oferta abierta; confirmación de "recibida".
+- Aceptar idempotente, con reintentos y pantalla optimista; rechazar con un solo intento.
+- Lista de "bloqueos para estar disponible" con su "arreglar" (en la PWA: notificaciones, ubicación y red; batería solo en nativo).
+- "En camino": en nativo, servicio en primer plano solo durante el trayecto; en el servidor, alarma de "sin posiciones en X minutos" para avisar al local y al trabajador.
+- En la PWA los botones Aceptar/Rechazar funcionan en Android con Chrome, pero no la pantalla completa sobre el bloqueo ni el sonido propio; en iPhone, menos.
+
 ## Pendientes
 
 - Configurar JADX y apktool en REA (`REA_JADX_MCP_JAR`, `REA_APKTOOL_COMMAND`) para decompilar clases y métodos concretos; esta pasada usó manifest, nombres de clases y textos.
