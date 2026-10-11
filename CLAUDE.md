@@ -39,3 +39,4 @@ Responder siempre en **español**, claro y simple, explicando los términos téc
 | Apps móviles: Uber Driver, Rappi, Morfy, Pasito | [notas/apps-moviles-referencia.md](notas/apps-moviles-referencia.md) | en curso | 2026-10-11 |
 | Qwick (app de profesionales) | [notas/qwick.md](notas/qwick.md) | en curso | 2026-10-11 |
 | Instawork (app de trabajadores) | [notas/instawork.md](notas/instawork.md) | en curso | 2026-10-11 |
+| inDrive (negociación de precio) | [notas/indrive.md](notas/indrive.md) | en curso | 2026-10-11 |
