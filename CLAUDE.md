@@ -29,4 +29,4 @@ Responder siempre en **español**, claro y simple, explicando los términos téc
 
 | Proyecto | Nota | Estado | Última actualización |
 |---|---|---|---|
-| _(todavía ninguno)_ | | | |
+| Rebill (sitio web) | [notas/rebill.md](notas/rebill.md) | en curso | 2026-10-11 |
