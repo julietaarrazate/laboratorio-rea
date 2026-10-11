@@ -37,3 +37,4 @@ Responder siempre en **español**, claro y simple, explicando los términos téc
 | Rebill (sitio web) | [notas/rebill.md](notas/rebill.md) | en curso | 2026-10-11 |
 | Despacho Uber / Rappi (fuentes públicas) | [notas/despacho-uber-rappi.md](notas/despacho-uber-rappi.md) | en curso | 2026-10-11 |
 | Apps móviles: Uber Driver, Rappi, Morfy, Pasito | [notas/apps-moviles-referencia.md](notas/apps-moviles-referencia.md) | en curso | 2026-10-11 |
+| Qwick (app de profesionales) | [notas/qwick.md](notas/qwick.md) | en curso | 2026-10-11 |
