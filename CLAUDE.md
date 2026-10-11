@@ -22,7 +22,12 @@ Responder siempre en **español**, claro y simple, explicando los términos téc
 ## Reglas
 
 - **El repo es público.** No guardar notas de proyectos privados (por ejemplo `control-operativo`), ni claves, ni datos personales.
-- Analizar solo software que la dueña tenga derecho a estudiar (código abierto, propio, o con permiso).
+- Se puede estudiar **cualquier app, sistema o software con fines de estudio** (incluidas apps cerradas de terceros). La dueña asume el riesgo de los términos de uso de cada producto.
+- Con software cerrado de terceros:
+  - Análisis estático de la copia local en `muestras/` (sin subirla a git).
+  - No extraer ni usar claves o credenciales, no esquivar protecciones de pago o licencias, no atacar ni sobrecargar sus servidores.
+  - Las notas explican con palabras propias cómo funciona; no copiar su código, textos ni recursos.
+  - Si una nota revela fallas de seguridad de un tercero, no guardarla en este repo público.
 - Nueva nota: copiar `notas/_plantilla.md` a `notas/<nombre-del-proyecto>.md`.
 
 ## Índice de análisis
