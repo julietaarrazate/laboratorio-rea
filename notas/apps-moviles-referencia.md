@@ -57,6 +57,49 @@ Cómo resuelven cuatro apps reales la ubicación, los avisos urgentes y el segui
 - Búsqueda de turnos por zona del mapa en el servidor; fichaje con QR o PIN en el local.
 - Retención: puntos con vencimiento, rachas, rankings por barrio, referidos.
 
+## Segunda pasada con JADX: seguimiento en vivo de Rappi
+
+Lógica leída del código decompilado (resumida con palabras propias; detalle de Evidence IDs en la sesión de REA).
+
+**Canal y datos**
+- El servidor manda, dentro del modelo del mapa, en qué base y en qué canal escuchar. La app solo se suscribe.
+- Cada actualización trae latitud, longitud y rumbo. **No trae hora**, así que la app no puede descartar posiciones viejas o desordenadas (punto débil).
+
+**Filtros**
+- Como mucho una posición por segundo; descarta (0,0), posiciones repetidas y movimientos de 10 m o menos.
+- Si falta el rumbo, lo calcula con la posición anterior.
+- Solo mueve el marcador cuando el pedido está en camino.
+
+**Respaldo**
+- Si el tiempo real falla, consulta una vez al servidor por REST y **a los 60 s vuelve a intentar** el tiempo real.
+- Un "vigilante" genérico ejecuta el respaldo si no llega nada en un tiempo límite y se reinicia con cada evento real.
+
+**Animación del marcador**
+- Tres modos: línea recta (1 s, con aceleración y frenado suaves y giro por el lado más corto), recorrido por un camino y **cola pegada a la ruta**.
+- En la cola, cada tramo dura distancia ÷ 9,5 m/s (entre 0,1 y 2 s). Si se juntan 15 o más puntos, entra en modo "ponerse al día" y los recorre todos en 2-3 s.
+- Se pega a la ruta **solo hacia adelante**; si el repartidor se aleja 30 m o más, recalcula la ruta.
+- Al entrar o salir de 50 m del local o del cliente, el ícono hace una pequeña animación.
+- El ícono gira según rumbo menos rumbo de la cámara, se achica con el zoom e ignora cambios de rumbo menores a 5°.
+- La cámara encuadra repartidor + local o repartidor + cliente según el estado, y no se mueve si la persona está tocando el mapa (inferido).
+
+**Estado y ETA**
+- La pantalla es una lista de **widgets que manda el servidor**, cada uno con un tipo.
+- El ETA puede ser una **cuenta regresiva hacia una hora exacta** que manda el servidor, calculada en el teléfono.
+
+**Notificaciones**
+- Un único punto reparte cada push según su tipo; **cada push confirma su recepción** al servidor.
+- Canales separados (general, chat, estado del pedido, llamada, seguimiento), todos de importancia alta.
+- La notificación fija del pedido muestra una **barra de progreso calculada en el teléfono** (hora de inicio vs. hora estimada) y se actualiza cada minuto solo si cambió 2% o más. No necesita un push por cada cambio.
+
+**Aplicación en Oído ("en camino" en la PWA)**
+- Al marcar "en camino", el backend crea una sesión de seguimiento con canal y vencimiento, y le da al local solo el canal y un token (por ejemplo, canal privado de Supabase Realtime con permisos por local).
+- Cada posición: latitud, longitud, rumbo, precisión, **hora y número de secuencia** (lo que le falta a Rappi).
+- Trabajador: envía como mucho una cada 5 s, solo durante el trayecto, descartando lecturas imprecisas.
+- Local: descarta posiciones viejas o repetidas, limita a 1 por segundo, ignora saltos menores a 10 m, marca "desactualizado" a los 30 s y "sin señal" a los 90 s.
+- Respaldo: si el canal cae, consulta cada 15 s y reintenta el tiempo real cada 60 s.
+- Marcador en MapLibre con animación por cuadro, duración según distancia y modo "ponerse al día"; recentrar solo si la persona no movió el mapa.
+- Web Push por cambio de estado que reemplaza la notificación anterior del mismo turno, con cuenta regresiva calculada en el cliente.
+
 ## Pendientes
 
 - Configurar JADX y apktool en REA (`REA_JADX_MCP_JAR`, `REA_APKTOOL_COMMAND`) para decompilar clases y métodos concretos; esta pasada usó manifest, nombres de clases y textos.
