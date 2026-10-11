@@ -22,7 +22,7 @@ Responder siempre en **español**, claro y simple, explicando los términos téc
 ## Reglas
 
 - **El repo es público.** No guardar notas de proyectos privados (por ejemplo `control-operativo`), ni claves, ni datos personales.
-- Se puede estudiar **cualquier app, sistema o software con fines de estudio** (incluidas apps cerradas de terceros). La dueña asume el riesgo de los términos de uso de cada producto.
+- Se puede estudiar **cualquier app, sistema o software** (incluidas apps cerradas de terceros), siempre con fines exclusivamente de estudio y aprendizaje.
 - Con software cerrado de terceros:
   - Análisis estático de la copia local en `muestras/` (sin subirla a git).
   - No extraer ni usar claves o credenciales, no esquivar protecciones de pago o licencias, no atacar ni sobrecargar sus servidores.
