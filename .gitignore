@@ -1,0 +1,7 @@
+# Programas a analizar: no se suben (pueden ser pesados o tener licencia)
+muestras/
+# Proyectos y caché de Ghidra
+*.gpr
+*.rep/
+ghidra-proyectos/
+.DS_Store
