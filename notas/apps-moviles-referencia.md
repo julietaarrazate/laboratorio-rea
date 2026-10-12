@@ -143,3 +143,23 @@ Lógica leída del código decompilado (resumida con palabras propias; Evidence 
 
 - Configurar JADX y apktool en REA (`REA_JADX_MCP_JAR`, `REA_APKTOOL_COMMAND`) para decompilar clases y métodos concretos; esta pasada usó manifest, nombres de clases y textos.
 - Soy Rappi (app de repartidores) no está en las tiendas públicas; conseguirla desde un celular.
+
+## Dónde alojan sus sitios web (2026-10-12)
+
+Mirado sólo con los encabezados públicos de la portada (`server`, `x-vercel-id`, `cf-ray`, `x-amz-cf-id`), un pedido por sitio. "Cloudflare" puede ser sólo la capa de adelante (CDN o protección) y no el alojamiento.
+
+| Producto | Sitio | Detrás |
+|---|---|---|
+| Uber | uber.com | Cloudflare (infra propia detrás) |
+| Rappi | rappi.com.ar | Amazon CloudFront (AWS) |
+| inDrive | indrive.com | Amazon CloudFront (AWS) |
+| Instawork | instawork.com | Cloudflare |
+| Qwick | qwick.com | Netlify |
+| TitoFree | titofree.com | Cloudflare |
+| Tegu | tegu.ar | Cloudflare delante de Vercel (Next.js) |
+| Clickie | clickie.com.ar | Vercel |
+| Rebill | rebill.com | Vercel |
+| Pasito | pasito.app (dominio supuesto) | Vercel |
+| Morfy | morfy.app (dominio supuesto) | Cloudflare |
+
+Lectura: los grandes (Uber, Rappi, inDrive) usan su propia infraestructura con una CDN adelante. Los chicos y los de Argentina se reparten entre Vercel y Cloudflare, y Tegu combina los dos.
