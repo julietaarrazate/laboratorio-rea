@@ -2,7 +2,7 @@
 # Configuración del entorno: Ghidra + REA conectado a Claude Code
 set -e
 
-# 1) Ghidra (gratis, ~1 GB, versión que pide REA 6.4.0). Usa el Java 21 que ya trae el entorno.
+# 1) Ghidra (gratis, ~1 GB, versión que pide REA 6.5.0). Usa el Java 21 que ya trae el entorno.
 GHIDRA_DIR=/opt/ghidra
 if ! grep -q "application.version=12.1.4" "$GHIDRA_DIR/Ghidra/application.properties" 2>/dev/null; then
   rm -rf "$GHIDRA_DIR"
@@ -15,7 +15,7 @@ fi
 export GHIDRA_INSTALL_DIR="$GHIDRA_DIR"
 
 # 2) REA: conecta el servidor MCP e instala su habilidad para Claude Code
-npx -y rea-agents@6.4.0 setup --client claude_code --yes
+npx -y rea-agents@6.5.0 setup --client claude_code --yes
 
 # 3) Le dice al servidor de REA dónde está Ghidra
 node -e '

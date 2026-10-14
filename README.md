@@ -14,7 +14,7 @@ Espacio para aprender cómo funcionan otros proyectos (ingeniería inversa) y an
 
 ## Herramientas
 
-- **REA** (`rea-agents` 6.4.0): ingeniería inversa desde Claude Code (servidor MCP + habilidad).
+- **REA** (`rea-agents` 6.5.0): ingeniería inversa desde Claude Code (servidor MCP + habilidad).
 - **Ghidra 12.1.4**: decompilador gratuito que REA usa para analizar programas compilados (`.exe`, `.so`, apps, firmware).
 
 Para leer **código fuente** (repos de GitHub) no hacen falta: Claude lo lee directamente.
@@ -28,7 +28,7 @@ Se ejecuta solo al iniciar cada sesión nueva (~20 segundos).
 Si cambia la versión de REA, revisar qué versión de Ghidra pide con:
 
 ```bash
-GHIDRA_INSTALL_DIR=/opt/ghidra npx -y rea-agents@6.4.0 doctor
+GHIDRA_INSTALL_DIR=/opt/ghidra npx -y rea-agents@6.5.0 doctor
 ```
 
 ## Cómo pedir un análisis

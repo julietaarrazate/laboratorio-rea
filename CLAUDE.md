@@ -16,7 +16,7 @@ Responder siempre en **español**, claro y simple, explicando los términos téc
 
 - **Código fuente** (repos): leerlo directo con las herramientas normales. No usar REA.
 - **Programas compilados** (`.exe`, `.so`, `.apk`, firmware, apps Electron empaquetadas): usar REA (servidor MCP `rea` + habilidad `reverse-engineer-anything`) con Ghidra en `/opt/ghidra`.
-- Si REA no aparece, el script de configuración no corrió: ver `scripts/setup-rea.sh` y verificar con `GHIDRA_INSTALL_DIR=/opt/ghidra npx -y rea-agents@6.4.0 doctor`.
+- Si REA no aparece, el script de configuración no corrió: ver `scripts/setup-rea.sh` y verificar con `GHIDRA_INSTALL_DIR=/opt/ghidra npx -y rea-agents@6.5.0 doctor`.
 - Los archivos a analizar van en `muestras/` (ignorada por git). Exportar hallazgos de REA a `notas/<proyecto>/` si son útiles para retomar.
 
 ## Reglas
