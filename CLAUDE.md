@@ -42,3 +42,4 @@ Responder siempre en **español**, claro y simple, explicando los términos téc
 | inDrive (negociación de precio) | [notas/indrive.md](notas/indrive.md) | en curso | 2026-10-11 |
 | Tegu y Clickie (servicios para el hogar, web) | [notas/tegu-clickie.md](notas/tegu-clickie.md) | en curso | 2026-10-11 |
 | TitoFree (empleo gastronómico, competidor) | [notas/titofree.md](notas/titofree.md) | en curso | 2026-10-11 |
+| Coofounder (sitio web, referencia visual) | [notas/coofounder.md](notas/coofounder.md) | en curso | 2026-10-15 |
